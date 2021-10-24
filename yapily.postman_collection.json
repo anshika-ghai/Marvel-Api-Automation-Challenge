@@ -1,0 +1,173 @@
+{
+	"info": {
+		"_postman_id": "0f4c6eac-b4fb-45ba-95a2-29688fd93f41",
+		"name": "yapily",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Marvel Test Cases",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status Code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Total number of characters(pagination)\", () => {\r",
+							"    let temp = pm.response.json().data.results;\r",
+							"    console.log(\"Total Number of Characters in \"+temp.length);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Result header is present\", () => {\r",
+							"  var expectedObject = [\"id\",\"name\",\"description\",\"modified\",\"thumbnail\",\"resourceURI\",\"comics\",\"series\",\"stories\",\"events\",\"urls\"];  \r",
+							"    let temp = pm.response.json().data.results;\r",
+							"    for(i =0, len=temp.length;i<len;i++){\r",
+							"    let keys = Object.keys(temp[i]);\r",
+							"    console.log(keys);\r",
+							"    pm.expect(_.isEqual(keys,expectedObject)).to.be.true;\r",
+							"}\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Negative Case: if any of the end point value is not present\", () => {\r",
+							"  var expectedObject = [\"id\",\"name\",\"description\",\"thumbnail\",\"resourceURI\",\"comics\",\"series\",\"stories\",\"events\",\"urls\"];  \r",
+							"    let temp = pm.response.json().data.results;\r",
+							"    for(i =0, len=temp.length;i<len;i++){\r",
+							"    let keys = Object.keys(temp[i]);\r",
+							"    pm.expect(_.isEqual(keys,expectedObject)).to.be.false;\r",
+							"}\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://gateway.marvel.com:443/v1/public/characters?apikey={{Key}}&hash={{Hash}}&ts=1",
+					"protocol": "https",
+					"host": [
+						"gateway",
+						"marvel",
+						"com"
+					],
+					"port": "443",
+					"path": [
+						"v1",
+						"public",
+						"characters"
+					],
+					"query": [
+						{
+							"key": "apikey",
+							"value": "{{Key}}"
+						},
+						{
+							"key": "hash",
+							"value": "{{Hash}}"
+						},
+						{
+							"key": "ts",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "marvel Negative Cases",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status Code is UnAuthorized 401\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://gateway.marvel.com:443/v1/public/characters?apikey={{WrongKey}}&hash={{Hash}}&ts=1",
+					"protocol": "https",
+					"host": [
+						"gateway",
+						"marvel",
+						"com"
+					],
+					"port": "443",
+					"path": [
+						"v1",
+						"public",
+						"characters"
+					],
+					"query": [
+						{
+							"key": "apikey",
+							"value": "{{WrongKey}}"
+						},
+						{
+							"key": "hash",
+							"value": "{{Hash}}"
+						},
+						{
+							"key": "ts",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
