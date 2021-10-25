@@ -1,5 +1,6 @@
 Anshika Ghai
 # yapilyApi
+Coding Challenge - Marvel API - v1
 
 **Installation**
 1. Install Node.js. https://nodejs.org/en/download/
