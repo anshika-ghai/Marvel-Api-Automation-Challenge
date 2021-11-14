@@ -1,5 +1,5 @@
 Anshika Ghai
-# yapilyApi
+# Marvel Api Automation Challenge
 Coding Challenge - Marvel API - v1
 
 **Installation**
